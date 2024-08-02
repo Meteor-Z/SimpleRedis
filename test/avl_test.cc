@@ -1,6 +1,6 @@
 #include <iostream>
 #include <memory>
-#include "DataStructure/Avl.h"
+#include "data_structure/avl.h"
 
 int main() {
     std::unique_ptr<SimpleRedis::AvlNode> root = std::make_unique<SimpleRedis::AvlNode>();
