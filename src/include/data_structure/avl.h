@@ -9,6 +9,18 @@ struct AvlNode {
     explicit AvlNode()
         : left { nullptr }, right { nullptr }, parent { nullptr }, depth { 1 },
           cnt { 1 } {}
+    ~AvlNode() {
+        if (left) {
+            delete left;
+            left = nullptr;
+        }
+        
+        if (right) {
+            delete right;
+            right = nullptr;
+        }
+    }
+
     size_t depth { 0 };
     size_t cnt { 0 };
     AvlNode* left { nullptr };
@@ -140,6 +152,21 @@ inline auto avl_del(AvlNode* node) -> AvlNode* {
         } else {
             return victim;
         }
+    }
+}
+
+// 对本身进行free操作
+inline auto avl_free(AvlNode* root) -> void {
+    if (!root) {
+        return;
+    }
+    
+    avl_free(root->left);
+    avl_free(root->right);
+
+    if (root) {
+        delete root;
+        root = nullptr;
     }
 }
 }; // namespace SimpleRedis
