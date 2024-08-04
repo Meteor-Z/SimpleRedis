@@ -14,7 +14,7 @@ struct AvlNode {
             delete left;
             left = nullptr;
         }
-        
+
         if (right) {
             delete right;
             right = nullptr;
@@ -28,13 +28,15 @@ struct AvlNode {
     AvlNode* parent { nullptr };
 };
 
-inline auto avl_cnt(const AvlNode* node) -> size_t { return node ? node->cnt : 0; }
+inline auto avl_get_cnt(const AvlNode* node) -> size_t { return node ? node->cnt : 0; }
 
-inline auto avl_depth(const AvlNode* node) -> size_t { return node ? node->depth : 0; }
+inline auto avl_get_depth(const AvlNode* node) -> size_t {
+    return node ? node->depth : 0;
+}
 
 inline auto avl_update(AvlNode* node) -> void {
-    node->depth = std::max(avl_depth(node->left), avl_depth(node->right)) + 1;
-    node->cnt = avl_cnt(node->left) + avl_cnt(node->right) + 1;
+    node->depth = std::max(avl_get_depth(node->left), avl_get_depth(node->right)) + 1;
+    node->cnt = avl_get_cnt(node->left) + avl_get_cnt(node->right) + 1;
 }
 
 //   2           4
@@ -77,14 +79,14 @@ inline auto avl_right_rot(AvlNode* node) -> AvlNode* {
 
 // 修复左旋
 inline auto avl_fix_left(AvlNode* root) -> AvlNode* {
-    if (avl_depth(root->left->left) < avl_depth(root->left->right)) {
+    if (avl_get_depth(root->left->left) < avl_get_depth(root->left->right)) {
         root->left = avl_left_rot(root->left);
     }
     return avl_right_rot(root);
 }
 
 inline auto avl_fix_right(AvlNode* root) -> AvlNode* {
-    if (avl_depth(root->right->right) < avl_depth(root->right->left)) {
+    if (avl_get_depth(root->right->right) < avl_get_depth(root->right->left)) {
         root->right = avl_right_rot(root->right);
     }
     return avl_left_rot(root);
@@ -93,8 +95,8 @@ inline auto avl_fix_right(AvlNode* root) -> AvlNode* {
 inline auto avl_fix(AvlNode* node) -> AvlNode* {
     while (true) {
         avl_update(node);
-        size_t l = avl_depth(node->left);
-        size_t r = avl_depth(node->right);
+        size_t l = avl_get_depth(node->left);
+        size_t r = avl_get_depth(node->right);
         AvlNode** from = nullptr;
         if (node->parent) {
             from =
@@ -155,20 +157,47 @@ inline auto avl_del(AvlNode* node) -> AvlNode* {
     }
 }
 
-// 对本身进行free操作
-inline auto avl_free(AvlNode* root) -> void {
-    if (!root) {
-        return;
+inline AvlNode* avl_offset(AvlNode* node, int64_t offset) {
+    int64_t pos = 0;
+    while (offset != pos) {
+        if (pos < offset && pos + avl_get_cnt(node->right) >= offset) {
+            node = node->right;
+            pos += avl_get_cnt(node->left) + 1;
+        } else if (pos > offset && pos - avl_get_cnt(node->left) <= offset) {
+            node = node->left;
+            pos -= avl_get_cnt(node->right) + 1;
+        } else {
+            // go to the parent
+            AvlNode* parent = node->parent;
+            if (!parent) {
+                return nullptr;
+            }
+            if (parent->right == node) {
+                pos -= avl_get_cnt(node->left) + 1;
+            } else {
+                pos += avl_get_cnt(node->right) + 1;
+            }
+            node = parent;
+        }
     }
-    
-    avl_free(root->left);
-    avl_free(root->right);
-
-    if (root) {
-        delete root;
-        root = nullptr;
-    }
+    return node;
 }
+
+// 对本身进行free操作, 侵入式数据结构是没有这个的!
+// inline auto avl_free(AvlNode* root) -> void {
+//     if (!root) {
+//         return;
+//     }
+
+//     avl_free(root->left);
+//     avl_free(root->right);
+
+//     if (root) {
+//         delete root;
+//         root = nullptr;
+//     }
+// }
+
 }; // namespace SimpleRedis
 
 // #pragma once

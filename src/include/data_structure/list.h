@@ -1,39 +1,26 @@
 #pragma once
 
-#include "DataStructure/Avl.h"
-#include <memory>
-
 namespace SimpleRedis {
 
-struct ListNode {
-public:
-    ListNode() : pre { this }, next { this } {}
-    ListNode(const ListNode&) = delete;
-    ListNode(ListNode&&) = delete;
-    ListNode& operator=(const ListNode&) = delete;
-    ListNode& operator=(ListNode&&) = delete;
+struct List {
+    List* pre { nullptr };
+    List* next { nullptr };
+    List() : pre { this }, next { this } {}
+    bool empty() const noexcept { return next == this; }
 
-    ~ListNode() {
-        if (pre) {
-            delete pre;
-        }
-        if (next) {
-            delete next;
-        }
-    }
-
-    auto empty() const -> bool { return next == this; }
-
-    // 将自身分离出来
-    auto detach() const -> void {
-        ListNode* p = pre;
-        ListNode* n = next;
+    void detach() const {
+        auto* p = pre;
+        auto* n = next;
         p->next = n;
-        n->next = p;
+        n->pre = p;
     }
 
-public:
-    ListNode* pre { nullptr };
-    ListNode* next { nullptr };
+    void insert_before(List* list) {
+        List* t = pre;
+        t->next = list;
+        list->pre = pre;
+        list->next = this;
+        this->pre = list;
+    }
 };
 }; // namespace SimpleRedis
