@@ -6,10 +6,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 
 
+# 测试相关
 add_executable(test main.cc)
 add_executable(avl_test test/avl_test.cc)
 add_executable(heap_test test/heap_test.cc)
-
+add_executable(threadpoll_test test/threadpool_test.cc)
 include_directories(${CMAKE_SOURCE_DIR}/src/include) # 加入头文件
 # target_link_libraries(${PROJECT_NAME} pthread) # 链接库
 
