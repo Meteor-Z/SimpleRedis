@@ -1,6 +1,6 @@
 /**
  * @file hash_table.h
- * @author your name (you@domain.com)
+ * @author lzc (liuzechen@coder.com)
  * @brief  底层数据结构不适合使用智能指针进行封装，而应该使用裸指针，裸指针就行了
  * @version 0.1
  * @date 2024-08-04
@@ -8,6 +8,10 @@
  * @copyright Copyright (c) 2024
  *
  */
+/*
+全程是：基于拉链法的渐进式扩容哈希的侵入实现
+
+*/
 #pragma once
 
 #include <cassert>
@@ -16,7 +20,6 @@
 #include <cstdlib>
 #include <functional>
 #include <string>
-#include <vector>
 
 namespace SimpleRedis {
 
@@ -24,8 +27,6 @@ constexpr size_t k_resizing_work { 128 };
 constexpr size_t k_max_load_factor { 8 };
 
 struct HNode {
-    HNode* next { nullptr };
-    uint64_t hcode { 0 };
     HNode() = default;
     HNode(uint64_t hcode_) : next { nullptr }, hcode { hcode_ } {}
     HNode(const HNode&) = delete;
@@ -39,6 +40,8 @@ struct HNode {
     //         next = nullptr;
     //     }
     // }
+    HNode* next { nullptr }; // 侵入到里面了，这里就是侵入式数据结构
+    uint64_t hcode { 0 };    // hash的数值
 };
 
 using Cmp = std::function<bool(HNode*, HNode*)>;
@@ -58,6 +61,7 @@ public:
     // HTab& operator=(const HTab&) = delete;
     // HTab& operator=(HTab&&) = delete;
 
+    // 插入进去
     void insert(HNode* node) {
         size_t pos = node->hcode & mask;
         HNode* next = tab[pos];
@@ -67,7 +71,7 @@ public:
         size++;
     }
 
-    HNode** lookup(const HNode* key, Cmp cmp) {
+    HNode** lookup(HNode* key, Cmp cmp) {
         if (!tab) {
             return nullptr;
         }
@@ -94,7 +98,7 @@ public:
 
     HNode** tab = { nullptr }; // 其实就是array，
     size_t mask = { 0 };       // 掩码，2^n - 1;
-    size_t size = { 0 };
+    size_t size = { 0 };       // 容量
 };
 
 struct HMap {
@@ -106,6 +110,7 @@ public:
         ht1.insert(node);
 
         if (!ht2.tab) {
+            // 负载量
             size_t load_factor = ht1.size / (ht1.mask + 1);
             if (load_factor >= k_max_load_factor) {
                 start_resizing();
@@ -122,6 +127,7 @@ public:
     }
 
 private:
+    // 将1的东西移动到2里面
     void start_resizing() {
         assert(ht2.tab == nullptr);
         ht2.tab = ht1.tab;
