@@ -13,6 +13,12 @@ public:
     File(File&& file) = delete;
     File& operator=(const File&) = delete;
     File& operator=(File&&) = delete;
+    
+    File& operator=(int fd_) {
+        fd = fd_;
+        return *this;
+    }
+
     ~File() {
         // 关闭文件描述符
         close(fd);
