@@ -105,11 +105,8 @@ inline std::ostream& operator<<(std::ostream& os, const DataType& data_type) {
  */
 // 之后补充
 
-/**
- * @brief
- * 因为这个存储的是当前当前数据，所以要得到他真正的数值，因为还有指针
- *
- */
+// 得到偏移量，不懂这里为啥这样搞，但是很牛逼就是了，
+// 这里是因为得到一个数值，还要得到里面的数值才能使用
 #define container_of(ptr, type, member)                                                  \
     ({                                                                                   \
         const typeof(((type*)0)->member)* __mptr = (ptr);                                \
@@ -152,6 +149,13 @@ std::ostream& operator<<(std::ostream& os, const std::optional<T>& op) {
         os << "nil";
     }
     return os;
+}
+
+// 获得一个时间戳
+inline uint64_t get_monotonic_usec() {
+    timespec tv = {0, 0};
+    clock_gettime(CLOCK_MONOTONIC, &tv);
+    return uint64_t(tv.tv_sec) * 1000000 + tv.tv_nsec / 1000;   
 }
 
 }; // namespace SimpleRedis

@@ -10,10 +10,14 @@ public:
     File() : fd(-1) {}
     explicit File(int fd_) : fd(fd_) {}
     File(const File&) = delete;
-    File(File&& file) = delete;
+    File(File&& file) {
+        fd = file.fd;
+        file.fd = -1;
+    }
+    
     File& operator=(const File&) = delete;
     File& operator=(File&&) = delete;
-    
+
     File& operator=(int fd_) {
         fd = fd_;
         return *this;
