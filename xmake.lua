@@ -1,9 +1,19 @@
 add_rules("mode.debug", "mode.release")
 
-target("SimpleRedis")
-    set_kind("binary")
-    add_files("src/*.cpp")
+add_requires("gtest")
 
+-- target("SimpleRedis")
+--     set_kind("binary")
+--     add_files("src/main.cc")
+    
+
+target("avl_test")
+    set_kind("binary")
+    add_files("test/avl_test/avl_test_main.cc")
+    -- add_files("src/basic/avl.h")
+    add_files("src/avl.cc")
+    add_packages("gtest")
+    add_defines("DEBUG")
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
 --

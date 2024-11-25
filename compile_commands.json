@@ -1,0 +1,6 @@
+[
+{
+  "directory": "/home/lzc/SimpleRedis",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-O3", "-I", "/home/lzc/.xmake/packages/g/gtest/v1.15.2/aea99fd8f63a47f0a0b9fe284bee1bfa/include", "-DNDEBUG", "-o", "build/.objs/avl_test/linux/x86_64/release/test/avl_test/main.cc.o", "test/avl_test/main.cc"],
+  "file": "test/avl_test/main.cc"
+}]
