@@ -6,7 +6,7 @@ add_requires("gtest")
 --     set_kind("binary")
 --     add_files("src/main.cc")
     
-
+-- avl的测试
 target("avl_test")
     set_kind("binary")
     add_files("test/avl_test/avl_test_main.cc")
@@ -14,6 +14,14 @@ target("avl_test")
     add_files("src/avl.cc")
     add_packages("gtest")
     add_defines("DEBUG")
+
+target("zset_test")
+    set_kind("binary")
+    add_files("test/zset_test/zset_test_main.cc")
+    add_files("src/*.cc")
+    add_packages("gtest")
+    add_defines("DEBUG")
+
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
 --

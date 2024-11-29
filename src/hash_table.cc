@@ -2,9 +2,15 @@
 #include <cassert>
 #include <cstddef>
 #include <cstdlib>
-#include <forward_list>
 
 namespace SimpleRedis {
+
+struct Entry {
+    HNode m_node {};
+    std::string m_key {};
+    std::string m_value {};
+};
+
 HTab::HTab(const size_t n) {
     // n是 2^n 的倍数
     assert(n > 0 && ((n - 1) & n) == 0);

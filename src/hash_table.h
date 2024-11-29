@@ -11,9 +11,10 @@ namespace SimpleRedis {
 
 struct HNode {
     HNode* m_next { nullptr };
-    uint64_t m_code { 0 };
+    uint64_t m_code { 0 }; // 其实这个就是str, 只不过str_hash了一成数字了
 };
 
+// hash表，这里主要是存储的kv，因为直接存储str不方便，那么这里直接存储的是h_code, 也就是字符串hash一下
 struct HTab {
 public:
     using Cmp = std::function<bool(HNode*, HNode*)>;
@@ -56,9 +57,5 @@ public:
     size_t m_resizing_pos = 0;
 };
 
-struct Entry {
-    HNode m_node {};
-    std::string m_key {};
-    std::string m_value {};
-};
+
 } // namespace SimpleRedis

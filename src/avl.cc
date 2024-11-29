@@ -63,7 +63,6 @@ AVLNode* avl_fix_right(AVLNode* root) {
         root->m_right = rot_right(root->m_right);
     }
     return rot_left(root);
-
 }
 
 AVLNode* avl_fix(AVLNode* node) {
@@ -92,6 +91,7 @@ AVLNode* avl_fix(AVLNode* node) {
 }
 
 // 笑死，完全不会
+// 分离节点并且返回树根
 AVLNode* avl_del(AVLNode* node) {
     if (node->m_right == nullptr) {
         AVLNode* parent = node->m_parent;
@@ -124,6 +124,34 @@ AVLNode* avl_del(AVLNode* node) {
             return victim;
         }
     }
+}
+
+AVLNode* avl_offset(AVLNode* node, int64_t offset) {
+    int64_t pos { 0 };
+    while (offset != pos) {
+        if (pos < offset & pos + avl_cnt(node->m_right) >= offset) {
+            node = node->m_right;
+            pos += avl_cnt(node->m_left) + 1;
+        } else if (pos > offset & pos - avl_cnt(node->m_left) <= offset) {
+            node = node->m_left;
+            pos -= avl_cnt(node->m_right) + 1;
+        } else {
+            AVLNode* parent = node->m_parent;
+            if (!parent) {
+                return nullptr;
+            }
+
+            if (parent->m_right == node) {
+                pos -= avl_cnt(node->m_left) + 1;
+            } else {
+                pos += avl_cnt(node->m_right) + 1;
+            }
+
+            node = parent;
+        }
+    }
+
+    return node;
 }
 
 void Container::add(uint32_t val) {
