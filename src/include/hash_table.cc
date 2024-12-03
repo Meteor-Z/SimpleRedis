@@ -2,6 +2,7 @@
 #include <cassert>
 #include <cstddef>
 #include <cstdlib>
+#include <string>
 
 namespace SimpleRedis {
 

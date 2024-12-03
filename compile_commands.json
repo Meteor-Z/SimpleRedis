@@ -1,11 +1,46 @@
 [
 {
   "directory": "/home/lzc/SimpleRedis",
-  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-O3", "-DDEBUG", "-I", "/home/lzc/.xmake/packages/g/gtest/v1.15.2/aea99fd8f63a47f0a0b9fe284bee1bfa/include", "-DNDEBUG", "-o", "build/.objs/avl_test/linux/x86_64/release/test/avl_test/avl_test_main.cc.o", "test/avl_test/avl_test_main.cc"],
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-O3", "-DDEBUG", "-I", "/home/lzc/.xmake/packages/g/gtest/v1.15.2/aea99fd8f63a47f0a0b9fe284bee1bfa/include", "-I", "/home/lzc/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-DNDEBUG", "-o", "build/.objs/zset_test/linux/x86_64/release/test/zset_test/zset_test_main.cc.o", "test/zset_test/zset_test_main.cc"],
+  "file": "test/zset_test/zset_test_main.cc"
+},
+{
+  "directory": "/home/lzc/SimpleRedis",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-O3", "-DDEBUG", "-I", "/home/lzc/.xmake/packages/g/gtest/v1.15.2/aea99fd8f63a47f0a0b9fe284bee1bfa/include", "-I", "/home/lzc/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-DNDEBUG", "-o", "build/.objs/zset_test/linux/x86_64/release/src/hash_table.cc.o", "src/hash_table.cc"],
+  "file": "src/hash_table.cc"
+},
+{
+  "directory": "/home/lzc/SimpleRedis",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-O3", "-DDEBUG", "-I", "/home/lzc/.xmake/packages/g/gtest/v1.15.2/aea99fd8f63a47f0a0b9fe284bee1bfa/include", "-I", "/home/lzc/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-DNDEBUG", "-o", "build/.objs/zset_test/linux/x86_64/release/src/list.cc.o", "src/list.cc"],
+  "file": "src/list.cc"
+},
+{
+  "directory": "/home/lzc/SimpleRedis",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-O3", "-DDEBUG", "-I", "/home/lzc/.xmake/packages/g/gtest/v1.15.2/aea99fd8f63a47f0a0b9fe284bee1bfa/include", "-I", "/home/lzc/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-DNDEBUG", "-o", "build/.objs/zset_test/linux/x86_64/release/src/heap.cc.o", "src/heap.cc"],
+  "file": "src/heap.cc"
+},
+{
+  "directory": "/home/lzc/SimpleRedis",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-O3", "-DDEBUG", "-I", "/home/lzc/.xmake/packages/g/gtest/v1.15.2/aea99fd8f63a47f0a0b9fe284bee1bfa/include", "-I", "/home/lzc/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-DNDEBUG", "-o", "build/.objs/zset_test/linux/x86_64/release/src/zset.cc.o", "src/zset.cc"],
+  "file": "src/zset.cc"
+},
+{
+  "directory": "/home/lzc/SimpleRedis",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-O3", "-DDEBUG", "-I", "/home/lzc/.xmake/packages/g/gtest/v1.15.2/aea99fd8f63a47f0a0b9fe284bee1bfa/include", "-I", "/home/lzc/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-DNDEBUG", "-o", "build/.objs/zset_test/linux/x86_64/release/src/avl.cc.o", "src/avl.cc"],
+  "file": "src/avl.cc"
+},
+{
+  "directory": "/home/lzc/SimpleRedis",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-O3", "-Isrc", "-DDEBUG", "-I", "/home/lzc/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-I", "/home/lzc/.xmake/packages/g/gtest/v1.15.2/aea99fd8f63a47f0a0b9fe284bee1bfa/include", "-DNDEBUG", "-o", "build/.objs/client/linux/x86_64/release/client.cc.o", "client.cc"],
+  "file": "client.cc"
+},
+{
+  "directory": "/home/lzc/SimpleRedis",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-O3", "-DDEBUG", "-I", "/home/lzc/.xmake/packages/g/gtest/v1.15.2/aea99fd8f63a47f0a0b9fe284bee1bfa/include", "-I", "/home/lzc/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-DNDEBUG", "-o", "build/.objs/avl_test/linux/x86_64/release/test/avl_test/avl_test_main.cc.o", "test/avl_test/avl_test_main.cc"],
   "file": "test/avl_test/avl_test_main.cc"
 },
 {
   "directory": "/home/lzc/SimpleRedis",
-  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-O3", "-DDEBUG", "-I", "/home/lzc/.xmake/packages/g/gtest/v1.15.2/aea99fd8f63a47f0a0b9fe284bee1bfa/include", "-DNDEBUG", "-o", "build/.objs/avl_test/linux/x86_64/release/src/avl.cc.o", "src/avl.cc"],
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-fvisibility-inlines-hidden", "-O3", "-DDEBUG", "-I", "/home/lzc/.xmake/packages/g/gtest/v1.15.2/aea99fd8f63a47f0a0b9fe284bee1bfa/include", "-I", "/home/lzc/.xmake/packages/f/fmt/11.0.2/8f2759149dd24c4c95ee980930242ead/include", "-DNDEBUG", "-o", "build/.objs/avl_test/linux/x86_64/release/src/avl.cc.o", "src/avl.cc"],
   "file": "src/avl.cc"
 }]

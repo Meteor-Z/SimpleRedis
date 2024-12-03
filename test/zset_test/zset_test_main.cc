@@ -1,8 +1,8 @@
 #include <cstdint>
 #include <iostream>
 #include <gtest/gtest.h>
-#include "../../src/avl.h"
-#include "../../src/zset.h"
+#include "../../src/include/avl.h"
+#include "../../src/include/zset.h"
 
 TEST(zset_verify_small, zset) {
     SimpleRedis::Container containner {};

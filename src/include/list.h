@@ -13,5 +13,6 @@ bool list_empty(List* node);
 
 void list_detach(List* node);
 
+// 在target之前插入一个元素， 目标元素 -> 目标元素
 void list_insert_before(List* target, List* rookie);
 }; // namespace SimpleRedis

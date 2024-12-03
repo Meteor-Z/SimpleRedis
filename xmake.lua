@@ -1,6 +1,6 @@
 add_rules("mode.debug", "mode.release")
 
-add_requires("gtest")
+add_requires("gtest", "fmt")
 
 -- target("SimpleRedis")
 --     set_kind("binary")
@@ -11,17 +11,29 @@ target("avl_test")
     set_kind("binary")
     add_files("test/avl_test/avl_test_main.cc")
     -- add_files("src/basic/avl.h")
-    add_files("src/avl.cc")
+    add_files("src/include/avl.cc")
     add_packages("gtest")
+    add_packages("gtest", "fmt")
     add_defines("DEBUG")
 
 target("zset_test")
     set_kind("binary")
     add_files("test/zset_test/zset_test_main.cc")
-    add_files("src/*.cc")
-    add_packages("gtest")
+    add_files("src/include/*.cc")
+    add_packages("gtest", "fmt")
     add_defines("DEBUG")
 
+target("client")
+    set_kind("binary")
+    add_files("src/client.cc")
+    add_packages("fmt", "gtest")
+    add_defines("DEBUG")
+
+target("server")
+    set_kind("binary")
+    add_files("src/server.cc")
+    add_packages("fmt")
+    add_defines("DEBUG")
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
 --

@@ -12,5 +12,11 @@ void list_detach(List* node) {
     nextv->pre = prev;
 }
 
-void list_insert_before(List* target, List* rookie);
+void list_insert_before(List* target, List* rookie) {
+    List* prev = target->pre;
+    prev->next = rookie;
+    rookie->pre = prev;
+    rookie->next = target;
+    target->pre = rookie;
+}
 } // namespace SimpleRedis

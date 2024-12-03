@@ -1,7 +1,10 @@
 #pragma once
 
 #include <cstdint>
+#include <cstdlib>
 #include <stddef.h>
+#include <string_view>
+#include <fmt/core.h>
 
 // Node *my_node = some_lookup_function();
 // MyData *my_data = container_of(my_node, MyData, node);
@@ -12,11 +15,17 @@
         (T*)((char*)__mptr - offsetof(T, member));                                       \
     })
 
-
 inline uint64_t str_hash(const uint8_t* data, size_t len) {
     uint32_t hash = 0x811C9DC5;
     for (size_t i = 0; i < len; i++) {
         hash = (hash + data[i]) % 0x01000193;
     }
     return hash;
+}
+
+// 打印错误
+
+inline void error_message(std::string_view str) {
+    fmt::println(str);
+    std::exit(-1);
 }

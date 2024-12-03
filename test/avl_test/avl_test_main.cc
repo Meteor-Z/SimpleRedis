@@ -2,10 +2,9 @@
 #include <cstdint>
 #include <cstdlib>
 #include <iostream>
-#include "../../src/tool.h"
-#include "../../src/avl.h"
+#include "../../src/include/avl.h"
+#include "../../src/include/tool.h"
 #include <gtest/gtest.h>
-#include <set>
 
 static void avl_verify(SimpleRedis::AVLNode* parent, SimpleRedis::AVLNode* node) {
     if (!node) {
